@@ -8,7 +8,8 @@ CCLaboratories Biodiversity Atlas
 body {
     background-color: white;
     color: DimGray;
-    font-family: 'Courier New', Courier, monospace;
+    /* font-family: 'Courier New', Courier, monospace; */
+    font-family: 'Youth Trial', monospace;
     font-size: 1em;
     line-height: 1.5em;
 }
@@ -20,7 +21,7 @@ body {
 
 .headline {
     font-size: 3em;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'ABC Gravity Unlicensed Trial', 'Times New Roman', Times, serif;
     font-weight: 600;
     margin-top: 80px;
     margin-bottom: 60px;
