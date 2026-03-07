@@ -6,12 +6,12 @@ CCLaboratories Biodiversity Atlas
 */
 
 body {
-    background-color: white;
-    color: DimGray;
-    /* font-family: 'Courier New', Courier, monospace; */
-    font-family: 'Youth Trial', monospace;
+    background-color: rgb(0, 0, 0);
+    color: rgb(225, 225, 225);
+    font-family: 'ABC Solar Display Variable Unlicensed Trial', monospace;
     font-size: 1em;
     line-height: 1.5em;
+
 }
 
 /* title */
@@ -19,9 +19,15 @@ body {
     text-align: center;
 }
 
+h3{
+    font-family: "Zen Dots", sans-serif;
+    font-size: 1em;
+    line-height: 1.5em;
+}
+
 .headline {
     font-size: 3em;
-    font-family: 'ABC Gravity Unlicensed Trial', 'Times New Roman', Times, serif;
+    font-family: 'Neue Sammlung Text Trials', 'Times New Roman', Times, serif;
     font-weight: 600;
     margin-top: 80px;
     margin-bottom: 60px;
@@ -34,20 +40,16 @@ body {
     margin: auto;
 }
 
-.black {
-    color: black;
+.orange {
+    color: rgb(244, 146, 55);
 }
 
 .red {
-    color: DeepPink;
-}
-
-.green {
-    color: LightSeaGreen;
+    color: rgb(240, 69, 50);
 }
 
 .yellow {
-    color: GoldenRod;
+    color: rgb(237, 208, 44);
 }
 
 .two-columns {
@@ -77,8 +79,8 @@ body {
     right: 15px;
     top: 15px;
     padding: 5px 10px;
-    color: dimgrey;
-    border: solid grey 0.5px;
+    color: rgb(225, 225, 225);
+    border: solid rgb(225, 225, 225) 0.5px;
     font-size: 0.6em;
     text-decoration: none;
 }
@@ -97,4 +99,7 @@ canvas {
 #p5-canvas-container {
     margin: auto;
     width: 800px;
+    border: none;
+    box-shadow: 0px 0px 15px orange;
+    margin-bottom: 20px;
 }

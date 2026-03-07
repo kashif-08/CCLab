@@ -1,3 +1,16 @@
+//colors for falling stars
+let r, g, b;
+
+//rocket
+let targetX, targetY;
+let initialX, initialY;
+let textSizeNum = 80;
+let gif;
+
+function preload() {
+  gif = loadImage("Rocket Lunch.gif");
+}
+
 let circleMainSize = 100;
 let cirOneSize = 10;
 let cirTwoSize = 20;
@@ -26,7 +39,7 @@ let x20, y20, vx20, vy20, s20;
 
 function setup() {
   let canvas = createCanvas(800, 500);
-  canvas.parent('p5-canvas-container');
+  canvas.parent('p5-canvas-container')
   s1 = random(2, 8);
   x1 = random(-200, -10);
   y1 = random(-200, -10);
@@ -127,11 +140,70 @@ function setup() {
   y20 = random(510, 700);
   vx20 = 0;
   vy20 = 0;
+
+  //for the rocket
+  targetX = width / 2;
+  targetY = height / 2;
+  initialX = random(100, width-100);
+  initialY = random(100, height-100);
+
+  //colors
+  r1 = random(0, 255);
+  g1 = random(0, 255);
+  b1 = random(0, 255);
+
+  r2 = random(0, 255);
+  g2 = random(0, 255);
+  b2 = random(0, 255);
+
+  r3 = random(0, 255);
+  g3 = random(0, 255);
+  b3 = random(0, 255);
+
+  r4 = random(0, 255);
+  g4 = random(0, 255);
+  b4 = random(0, 255);
+
+  r5 = random(0, 255);
+  g5 = random(0, 255);
+  b5 = random(0, 255);
+
+  r6 = random(0, 255);
+  g6 = random(0, 255);
+  b6 = random(0, 255);
+
+  r7 = random(0, 255);
+  g7 = random(0, 255);
+  b7 = random(0, 255);
+
+  r8 = random(0, 255);
+  g8 = random(0, 255);
+  b8 = random(0, 255);
+
+  r9 = random(0, 255);
+  g9 = random(0, 255);
+  b9 = random(0, 255);
+
+  r10 = random(0, 255);
+  g10 = random(0, 255);
+  b10 = random(0, 255);
 }
 
 function draw() {
-  background(0, 20);
+  let dis = dist(mouseX, mouseY, targetX, targetY);
+
+  if ((dis < 170 && textSizeNum > 2) || mouseIsPressed) {
+    if (frameCount % 30 < 15) {
+      background(60, 0, 0, 40);
+    } else {
+      background(0, 0, 0, 40);
+    }
+  } else {
+    background(0, 20);
+  }
   drawCreature(width / 2, height / 2);
+  rocketMouseMove();
+  // console.log(initialX, initialY)
 }
 
 function drawCreature(x, y) {
@@ -225,9 +297,11 @@ function updateParticle1() {
   if (mouseIsPressed) {
     vx1 += (width / 2 - x1) * 0.0005;
     vy1 += (height / 2 - y1) * 0.0005;
+    fill(r1, g1, b1);
   } else {
     vx1 += (width / 2 - x1) * 0.00005;
     vy1 += (height / 2 - y1) * 0.00005;
+    fill(255, 255, 255);
   }
   x1 += vx1;
   y1 += vy1;
@@ -243,9 +317,11 @@ function updateParticle2() {
   if (mouseIsPressed) {
     vx2 += (width / 2 - x2) * 0.0006;
     vy2 += (height / 2 - y2) * 0.0006;
+    fill(r2, g2, b2);
   } else {
     vx2 += (width / 2 - x2) * 0.00006;
     vy2 += (height / 2 - y2) * 0.00006;
+    fill(255, 255, 255);
   }
   x2 += vx2;
   y2 += vy2;
@@ -261,9 +337,11 @@ function updateParticle3() {
   if (mouseIsPressed) {
     vx3 += (width / 2 - x3) * 0.0007;
     vy3 += (height / 2 - y3) * 0.0007;
+    fill(r3, g3, b3);
   } else {
     vx3 += (width / 2 - x3) * 0.00007;
     vy3 += (height / 2 - y3) * 0.00007;
+    fill(255, 255, 255);
   }
   x3 += vx3;
   y3 += vy3;
@@ -279,9 +357,11 @@ function updateParticle4() {
   if (mouseIsPressed) {
     vx4 += (width / 2 - x4) * 0.0008;
     vy4 += (height / 2 - y4) * 0.0008;
+    fill(r4, g4, b4);
   } else {
     vx4 += (width / 2 - x4) * 0.00008;
     vy4 += (height / 2 - y4) * 0.00008;
+    fill(255, 255, 255);
   }
   x4 += vx4;
   y4 += vy4;
@@ -297,9 +377,11 @@ function updateParticle5() {
   if (mouseIsPressed) {
     vx5 += (width / 2 - x5) * 0.0005;
     vy5 += (height / 2 - y5) * 0.0005;
+    fill(r5, g5, b5);
   } else {
     vx5 += (width / 2 - x5) * 0.00005;
     vy5 += (height / 2 - y5) * 0.00005;
+    fill(255, 255, 255);
   }
   x5 += vx5;
   y5 += vy5;
@@ -315,9 +397,11 @@ function updateParticle6() {
   if (mouseIsPressed) {
     vx6 += (width / 2 - x6) * 0.0006;
     vy6 += (height / 2 - y6) * 0.0006;
+    fill(r6, g6, b6);
   } else {
     vx6 += (width / 2 - x6) * 0.00009;
     vy6 += (height / 2 - y6) * 0.00009;
+    fill(255, 255, 255);
   }
   x6 += vx6;
   y6 += vy6;
@@ -333,9 +417,11 @@ function updateParticle7() {
   if (mouseIsPressed) {
     vx7 += (width / 2 - x7) * 0.0007;
     vy7 += (height / 2 - y7) * 0.0007;
+    fill(r7, g7, b7);
   } else {
     vx7 += (width / 2 - x7) * 0.00007;
     vy7 += (height / 2 - y7) * 0.00007;
+    fill(255, 255, 255);
   }
   x7 += vx7;
   y7 += vy7;
@@ -351,9 +437,11 @@ function updateParticle8() {
   if (mouseIsPressed) {
     vx8 += (width / 2 - x8) * 0.0008;
     vy8 += (height / 2 - y8) * 0.0008;
+    fill(r8, g8, b8);
   } else {
     vx8 += (width / 2 - x8) * 0.00008;
     vy8 += (height / 2 - y8) * 0.00008;
+    fill(255, 255, 255);
   }
   x8 += vx8;
   y8 += vy8;
@@ -369,9 +457,11 @@ function updateParticle9() {
   if (mouseIsPressed) {
     vx9 += (width / 2 - x9) * 0.0009;
     vy9 += (height / 2 - y9) * 0.0009;
+    fill(r9, g9, b9);
   } else {
     vx9 += (width / 2 - x9) * 0.00006;
     vy9 += (height / 2 - y9) * 0.00006;
+    fill(255, 255, 255);
   }
   x9 += vx9;
   y9 += vy9;
@@ -387,9 +477,11 @@ function updateParticle10() {
   if (mouseIsPressed) {
     vx10 += (width / 2 - x10) * 0.001;
     vy10 += (height / 2 - y10) * 0.001;
+    fill(r10, g10, b10);
   } else {
     vx10 += (width / 2 - x10) * 0.00005;
     vy10 += (height / 2 - y10) * 0.00005;
+    fill(255, 255, 255);
   }
   x10 += vx10;
   y10 += vy10;
@@ -405,9 +497,11 @@ function updateParticle11() {
   if (mouseIsPressed) {
     vx11 += (width / 2 - x11) * 0.0005;
     vy11 += (height / 2 - y11) * 0.0005;
+    fill(r1, g1, b1);
   } else {
     vx11 += (width / 2 - x11) * 0.00009;
     vy11 += (height / 2 - y11) * 0.00009;
+    fill(255, 255, 255);
   }
   x11 += vx11;
   y11 += vy11;
@@ -423,9 +517,11 @@ function updateParticle12() {
   if (mouseIsPressed) {
     vx12 += (width / 2 - x12) * 0.0006;
     vy12 += (height / 2 - y12) * 0.0006;
+    fill(r2, g2, b2);
   } else {
     vx12 += (width / 2 - x12) * 0.00007;
     vy12 += (height / 2 - y12) * 0.00007;
+    fill(255, 255, 255);
   }
   x12 += vx12;
   y12 += vy12;
@@ -441,9 +537,11 @@ function updateParticle13() {
   if (mouseIsPressed) {
     vx13 += (width / 2 - x13) * 0.0007;
     vy13 += (height / 2 - y13) * 0.0007;
+    fill(r3, g3, b3);
   } else {
     vx13 += (width / 2 - x13) * 0.00008;
     vy13 += (height / 2 - y13) * 0.00008;
+    fill(255, 255, 255);
   }
   x13 += vx13;
   y13 += vy13;
@@ -459,9 +557,11 @@ function updateParticle14() {
   if (mouseIsPressed) {
     vx14 += (width / 2 - x14) * 0.0008;
     vy14 += (height / 2 - y14) * 0.0008;
+    fill(r4, g4, b4);
   } else {
     vx14 += (width / 2 - x14) * 0.00006;
     vy14 += (height / 2 - y14) * 0.00006;
+    fill(255, 255, 255);
   }
   x14 += vx14;
   y14 += vy14;
@@ -477,9 +577,11 @@ function updateParticle15() {
   if (mouseIsPressed) {
     vx15 += (width / 2 - x15) * 0.0009;
     vy15 += (height / 2 - y15) * 0.0009;
+    fill(r5, g5, b5);
   } else {
     vx15 += (width / 2 - x15) * 0.00005;
     vy15 += (height / 2 - y15) * 0.00005;
+    fill(255, 255, 255);
   }
   x15 += vx15;
   y15 += vy15;
@@ -495,9 +597,11 @@ function updateParticle16() {
   if (mouseIsPressed) {
     vx16 += (width / 2 - x16) * 0.0006;
     vy16 += (height / 2 - y16) * 0.0006;
+    fill(r6, g6, b6);
   } else {
     vx16 += (width / 2 - x16) * 0.00007;
     vy16 += (height / 2 - y16) * 0.00007;
+    fill(255, 255, 255);
   }
   x16 += vx16;
   y16 += vy16;
@@ -513,9 +617,11 @@ function updateParticle17() {
   if (mouseIsPressed) {
     vx17 += (width / 2 - x17) * 0.0007;
     vy17 += (height / 2 - y17) * 0.0007;
+    fill(r7, g7, b7);
   } else {
     vx17 += (width / 2 - x17) * 0.00008;
     vy17 += (height / 2 - y17) * 0.00008;
+    fill(255, 255, 255);
   }
   x17 += vx17;
   y17 += vy17;
@@ -531,9 +637,11 @@ function updateParticle18() {
   if (mouseIsPressed) {
     vx18 += (width / 2 - x18) * 0.0008;
     vy18 += (height / 2 - y18) * 0.0008;
+    fill(r8, g8, b8);
   } else {
     vx18 += (width / 2 - x18) * 0.00009;
     vy18 += (height / 2 - y18) * 0.00009;
+    fill(255, 255, 255);
   }
   x18 += vx18;
   y18 += vy18;
@@ -549,9 +657,11 @@ function updateParticle19() {
   if (mouseIsPressed) {
     vx19 += (width / 2 - x19) * 0.0009;
     vy19 += (height / 2 - y19) * 0.0009;
+    fill(r9, g9, b9);
   } else {
     vx19 += (width / 2 - x19) * 0.00006;
     vy19 += (height / 2 - y19) * 0.00006;
+    fill(255, 255, 255);
   }
   x19 += vx19;
   y19 += vy19;
@@ -567,9 +677,11 @@ function updateParticle20() {
   if (mouseIsPressed) {
     vx20 += (width / 2 - x20) * 0.001;
     vy20 += (height / 2 - y20) * 0.001;
+    fill(r10, g10, b10);
   } else {
     vx20 += (width / 2 - x20) * 0.00007;
     vy20 += (height / 2 - y20) * 0.00007;
+    fill(255, 255, 255);
   }
   x20 += vx20;
   y20 += vy20;
@@ -580,4 +692,29 @@ function updateParticle20() {
     vy20 = 0;
   }
   circle(x20, y20, s20);
+}
+
+//rocket
+
+function rocketMouseMove() {
+  let dis = dist(mouseX, mouseY, targetX, targetY);
+
+  if (mouseIsPressed) {
+    initialX = lerp(initialX, targetX, 0.05);
+    initialY = lerp(initialY, targetY, 0.05);
+    textSizeNum = textSizeNum - 0.5;
+  } else if (dis < 170) {
+    initialX = lerp(initialX, targetX, 0.01);
+    initialY = lerp(initialY, targetY, 0.01);
+    textSizeNum = textSizeNum - 0.2;
+  } else if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+    initialX = mouseX;
+    initialY = mouseY;
+    textSizeNum = 80;
+  }
+
+  // without the if conditional, the image would become very small, and then again start growing weirdly!
+  if (textSizeNum > 0) {
+    image(gif, initialX, initialY, textSizeNum, textSizeNum);
+  }
 }
