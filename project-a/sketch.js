@@ -39,7 +39,7 @@ let x20, y20, vx20, vy20, s20;
 
 function setup() {
   let canvas = createCanvas(800, 500);
-  canvas.parent('p5-canvas-container')
+  canvas.parent('p5-canvas-container');
   s1 = random(2, 8);
   x1 = random(-200, -10);
   y1 = random(-200, -10);
@@ -187,6 +187,8 @@ function setup() {
   r10 = random(0, 255);
   g10 = random(0, 255);
   b10 = random(0, 255);
+  
+  noCursor();
 }
 
 function draw() {
@@ -708,10 +710,14 @@ function rocketMouseMove() {
     initialY = lerp(initialY, targetY, 0.01);
     textSizeNum = textSizeNum - 0.2;
   } else if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-    initialX = mouseX;
-    initialY = mouseY;
+    initialX = lerp(initialX, mouseX, 0.01);
+    initialY = lerp(initialY, mouseY, 0.01);
     textSizeNum = 80;
-  }
+} 
+  // else {
+  //   initialX = lerp(initialX, mouseX, 0.01);
+  //   initialY = lerp(initialY, mouseY, 0.01);
+  // }
 
   // without the if conditional, the image would become very small, and then again start growing weirdly!
   if (textSizeNum > 0) {
