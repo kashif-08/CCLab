@@ -710,8 +710,8 @@ function rocketMouseMove() {
     initialY = lerp(initialY, targetY, 0.01);
     textSizeNum = textSizeNum - 0.2;
   } else if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-    initialX = lerp(initialX, mouseX, 0.05);
-    initialY = lerp(initialY, mouseY, 0.05);
+    initialX = lerp(initialX, mouseX, 0.03);
+    initialY = lerp(initialY, mouseY, 0.03);
     textSizeNum = 80;
 } 
   // else {
