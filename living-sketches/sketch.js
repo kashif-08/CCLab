@@ -5,7 +5,7 @@ let busAnim = 0;
 let cloudAnim = 0;
 
 function preload() {
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= 5; i++) {
     landscape.push(loadImage("anim" + i + ".jpg"));
   }
   for (let i = 1; i <= 16; i++) {
