@@ -168,18 +168,18 @@ class spongeDancer {
     //static body part of bob
     stroke(247, 247, 87);
     strokeWeight(8);
-    line(0, 0 - 15, 0 - 15, 0 + 10);
-    line(0, 0 - 15, 0, 0 + 20);
-    line(0, 0 + 20, 0 + 10, 0 + 50);
-    line(0 + 10, 0 + 50, 0 - 5, 0 + 100);
+    line(0, -15, -15, 10);
+    line(0, -15, 0, 20);
+    line(0, 20, 10, 50);
+    line(10, 50, 5, 100);
 
     //moving leg of bob
     stroke(247, 247, 87);
-    line(0, 0 + 20, 0 + 25, 0 + 50);
-    line(0 + 25, 0 + 50, 0 + this.movinglegX, 0 + this.movinglegY);
+    line(0, 20, 25, 50);
+    line(25, 50,  this.movinglegX, this.movinglegY);
 
     //moving arm of bob
-    line(0 - 15, 0 + 10, 0 + this.movingarmX, 0 + this.movingarmY);
+    line(-15, 10, this.movingarmX, this.movingarmY);
 
     pop();
   }
