@@ -1,3 +1,8 @@
+//canvas
+
+let canvasWid = 1440;
+let canvasHei = 800;
+
 // image related variables
 let settingImage;
 let settingImageSnow;
@@ -7,16 +12,29 @@ let birdX;
 let snowflakes = [];
 let marketImg;
 
+//smoke
+let smokeY1, smokeY2, smokeY3;
+let smokeX1, smokeX2, smokeX3;
+
 //overlay/opening img
 let openingImg;
 let isOpening = true;
 let enterBtn;
 
+//animated characters
+// let stateOne;
+// let stateTwo;
+// let stateThree;
+let animFrames = [];
+let animX = -300;
+let animY = -12
+
 // sound related variables
 let marketSound;
 let shikaraSound;
 let hazratbal;
-let dalgateSound;
+let summerSound;
+let snowSound;
 let song1;
 let song2;
 let song3;
@@ -38,12 +56,20 @@ function preload() {
   openingImg = loadImage('images/opening.png');
   settingImage = loadImage('images/main-setting.png');
   settingImageSnow = loadImage('images/main-setting-snow.png');
+  // stateOne = loadImage('images/anim-1.png');
+  // stateTwo = loadImage('images/anim-2.png');
+  // stateThree = loadImage('images/anim-3.png');
+  animFrames[0] = loadImage('images/anim-1.png');
+  animFrames[1] = loadImage('images/anim-2.png');
+  animFrames[2] = loadImage('images/anim-3.png');
+
   marketImg = loadImage('images/goni-khan-market.jpg');
   birds = loadImage('images/birds.gif');
   marketSound = loadSound('audios/market.mp3');
   shikaraSound = loadSound('audios/Shikara.mp3');
   hazratbal = loadSound('audios/Hazratbal.mp3');
-  dalgateSound = loadSound('audios/Dal-gate.wav');
+  summerSound = loadSound('audios/summer-sound.wav');
+  snowSound = loadSound('audios/snow-sound.wav');
   song1 = loadSound('audios/Hoshdar.mp3');
   song2 = loadSound('audios/Hoshmatiye.mp3');
   song3 = loadSound('audios/Golabaw.mp3');
@@ -51,7 +77,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(canvasWid, canvasHei);
   boat = new Boat(130, 280, 2);
   birdX = 1000;
   birds.resize(300, 0);
@@ -60,10 +86,16 @@ function setup() {
     snowflakes[i] = new Snowflake();
   }
 
+  //smoke
+
+  smokeX1 = 366; smokeY1 = 210;
+  smokeX2 = 366; smokeY2 = 180;
+  smokeX3 = 366; smokeY3 = 150;
+
   //entry button
 
   enterBtn = createButton('Enter');
-  enterBtn.position(windowWidth / 2 - 50, windowHeight / 2 + 100);
+  enterBtn.position(canvasWid / 2 - 50, canvasHei / 2 + 100);
   enterBtn.style('padding', '12px 30px');
   enterBtn.style('font-size', '18px');
   enterBtn.style('cursor', 'pointer');
@@ -74,7 +106,7 @@ function setup() {
   enterBtn.mousePressed(function () {
     isOpening = false;
     enterBtn.remove();
-    dalgateSound.loop();
+    summerSound.loop();
   });
 
   // toggle button
@@ -91,7 +123,7 @@ function setup() {
 
   // prev button
   prevBtn = createButton('‹');
-  prevBtn.position(windowWidth - 120, windowHeight - 60);
+  prevBtn.position(canvasWid - 160, canvasHei - 80);
   prevBtn.style('font-size', '24px');
   prevBtn.style('cursor', 'pointer');
   prevBtn.style('border', 'none');
@@ -110,7 +142,7 @@ function setup() {
 
   // play button
   playBtn = createButton('▶');
-  playBtn.position(windowWidth - 170, windowHeight - 60);
+  playBtn.position(canvasWid - 120, canvasHei - 80);
   playBtn.style('font-size', '14px');
   playBtn.style('cursor', 'pointer');
   playBtn.style('border', 'none');
@@ -133,7 +165,7 @@ function setup() {
 
   // next button
   nextBtn = createButton('›');
-  nextBtn.position(windowWidth - 85, windowHeight - 60);
+  nextBtn.position(canvasWid - 80, canvasHei - 80);
   nextBtn.style('font-size', '24px');
   nextBtn.style('cursor', 'pointer');
   nextBtn.style('border', 'none');
@@ -164,13 +196,18 @@ function toggleSeason() {
   if (isSnow) {
     toggleBtn.html('☀️');
     toggleBtn.style('background-color', '#6ab0e8');
+    summerSound.stop();
+    snowSound.loop();
   } else {
     toggleBtn.html('❄️');
     toggleBtn.style('background-color', '#4a90d9');
+    snowSound.stop();
+    summerSound.loop();
   }
 }
 
 function draw() {
+  console.log(mouseX, mouseY);
   background(220);
   if (isOpening) {
     image(openingImg, 0, 0);
@@ -188,21 +225,38 @@ function draw() {
     }
 
     image(birds, birdX, 0);
-    birdX--;
+    if (birdX < -400) {
+      birdX = 1600;
+    } else {
+      birdX--;
+
+    }
 
     boat.move();
     boat.display();
     boat.hover();
 
-    if (mouseX > 855 && mouseX < 1500 && mouseY > 340 && mouseY < 450) {
+    let animIndex = 0;  // static by default
+
+    if (mouseX > 855 && mouseX < 1500 && mouseY > 340 && mouseY < 500) {
+      animIndex = floor((frameCount / 10) % animFrames.length);  // animate on hover
       if (!marketSound.isPlaying()) {
         marketSound.play();
+      }
+      animX += 0.2;
+      animY += 0.007
+      if (animX > 250) {
+        animX = -300;
+        animY = -12;
       }
     } else {
       marketSound.stop();
     }
 
-    if (mouseX > 313 && mouseX < 425 && mouseY > 191 && mouseY < 315) {
+
+    image(animFrames[animIndex], animX, animY);
+
+    if (mouseX > 313 && mouseX < 425 && mouseY > 170 && mouseY < 320) {
       if (!hazratbal.isPlaying()) {
         hazratbal.play();
       }
@@ -215,8 +269,55 @@ function draw() {
       fill(255);
       noStroke();
       textSize(14);
-      text(songNames[currentSong], windowWidth - 120, windowHeight - 70);
+      text(songNames[currentSong], canvasWid - 130, canvasHei - 90);
     }
+
+
+    // smoke
+    noStroke();
+    fill(117, 123, 130);
+
+    if (mouseX > 313 && mouseX < 425 && mouseY > 170 && mouseY < 320) {
+      smokeY1 -= 0.5;
+      smokeX1 += + random(-0.5, 0.5)
+      if (smokeY1 < -20) {
+        smokeY1 = 210;
+      }
+
+      smokeY2 -= 0.5;
+      smokeX2 += + random(-0.5, 0.5)
+      if (smokeY2 < -20) {
+        smokeY2 = 210;
+      }
+
+      smokeY3 -= 0.5;
+      smokeX3 += + random(-0.5, 0.5)
+      if (smokeY3 < -20) {
+        smokeY3 = 210;
+      }
+    } else {
+      smokeX1 = 366; smokeY1 = 210;
+      smokeX2 = 366; smokeY2 = 150;
+      smokeX3 = 366; smokeY3 = 100;
+
+    }
+    ellipse(smokeX1, smokeY1, 20, 20);
+    // smokeY1 -= 0.5;
+    // if (smokeY1 < -20) {
+    //   smokeY1 = 430;
+    // }
+
+    ellipse(smokeX2, smokeY2, 15, 15);
+    // smokeY2 -= 0.5;
+    // if (smokeY2 < -20) {
+    //   smokeY2 = 430;
+    // }
+
+    ellipse(smokeX3, smokeY3, 10, 10);
+    // smokeY3 -= 0.5;
+    // if (smokeY3 < -20) {
+    //   smokeY3 = 430;
+    // }
   }
 }
 
@@ -230,14 +331,15 @@ class Boat {
   }
 
   move() {
-    this.x += this.speed * 0.1;
+    // this.x += this.speed * 0.1;
     if (this.x > width) {
-      // this.x = -this.img.width;
+      this.x = 230;
     }
   }
 
   hover() {
     if (mouseX > this.x && mouseX < this.x + 230 && mouseY > this.y + 300 && mouseY < this.y + 370) {
+      this.x += this.speed * 0.1;
       if (!shikaraSound.isPlaying()) {
         shikaraSound.play();
       }
@@ -247,10 +349,10 @@ class Boat {
   }
 
   display() {
-    noFill();
-    stroke(255, 0, 0);
-    strokeWeight(2);
-    rect(this.x, this.y + 300, this.img.width, this.img.height);
+    // noFill();
+    // stroke(255, 0, 0);
+    // strokeWeight(2);
+    // rect(this.x, this.y + 300, this.img.width, this.img.height);
     image(this.img, this.x, this.y + random(300, 300.8));
   }
 }
