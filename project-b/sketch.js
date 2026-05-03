@@ -109,6 +109,10 @@ function setup() {
     isOpening = false;
     enterBtn.remove();
     summerSound.loop();
+    toggleBtn.show();
+    prevBtn.show();
+    playBtn.show();
+    nextBtn.show();
   });
 
   // toggle button
@@ -122,6 +126,7 @@ function setup() {
   toggleBtn.style('background-color', '#4a90d9');
   toggleBtn.style('color', 'white');
   toggleBtn.mousePressed(toggleSeason);
+  toggleBtn.hide();
 
   // prev button
   prevBtn = createButton('‹');
@@ -141,6 +146,7 @@ function setup() {
     }
     playBtn.html('⏸');
   });
+  prevBtn.hide();
 
   // play button
   playBtn = createButton('▶');
@@ -164,6 +170,7 @@ function setup() {
       playBtn.html('⏸');
     }
   });
+  playBtn.hide();
 
   // next button
   nextBtn = createButton('›');
@@ -183,6 +190,7 @@ function setup() {
     }
     playBtn.html('⏸');
   });
+  nextBtn.hide();
 }
 
 function playSong(index) {
@@ -332,7 +340,7 @@ function draw() {
   let isHoveringMarket = mouseX > 855 && mouseX < 1500 && mouseY > 340 && mouseY < 500;
   let isHoveringMosque = mouseX > 313 && mouseX < 425 && mouseY > 170 && mouseY < 320;
 
-  if (isHoveringBoat || isHoveringMarket || isHoveringMosque) {
+  if (isHoveringBoat || isHoveringMarket || isHoveringMosque || isPlaying) {
     summerSound.stop();
     snowSound.stop();
   } else {
