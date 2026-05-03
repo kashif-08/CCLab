@@ -11,6 +11,7 @@ let birds;
 let birdX;
 let snowflakes = [];
 let marketImg;
+let chinar;
 
 //smoke
 let smokeY1, smokeY2, smokeY3;
@@ -56,6 +57,7 @@ function preload() {
   openingImg = loadImage('images/opening.png');
   settingImage = loadImage('images/main-setting.png');
   settingImageSnow = loadImage('images/main-setting-snow.png');
+  chinar = loadImage('images/chinar.png');
   // stateOne = loadImage('images/anim-1.png');
   // stateTwo = loadImage('images/anim-2.png');
   // stateThree = loadImage('images/anim-3.png');
@@ -318,6 +320,31 @@ function draw() {
     // if (smokeY3 < -20) {
     //   smokeY3 = 430;
     // }
+
+    image(chinar, mouseX - 25, mouseY - 25, 50, 50);
+    noCursor();
+  }
+  // image(chinar, mouseX - 25, mouseY - 25, 50, 50);
+  // noCursor();
+
+  // manage background sound
+  let isHoveringBoat = mouseX > boat.x && mouseX < boat.x + 230 && mouseY > boat.y + 300 && mouseY < boat.y + 370;
+  let isHoveringMarket = mouseX > 855 && mouseX < 1500 && mouseY > 340 && mouseY < 500;
+  let isHoveringMosque = mouseX > 313 && mouseX < 425 && mouseY > 170 && mouseY < 320;
+
+  if (isHoveringBoat || isHoveringMarket || isHoveringMosque) {
+    summerSound.stop();
+    snowSound.stop();
+  } else {
+    if (isSnow) {
+      if (!snowSound.isPlaying()) {
+        snowSound.loop();
+      }
+    } else {
+      if (!summerSound.isPlaying()) {
+        summerSound.loop();
+      }
+    }
   }
 }
 
