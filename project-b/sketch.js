@@ -3,6 +3,8 @@
 let canvasWid = 1440;
 let canvasHei = 800;
 
+let activePopup = '';  // stores which popup is open, empty means none
+
 // image related variables
 let settingImage;
 let settingImageSnow;
@@ -249,6 +251,10 @@ function draw() {
     let animIndex = 0;  // static by default
 
     if (mouseX > 855 && mouseX < 1500 && mouseY > 340 && mouseY < 500) {
+      fill(255);
+      textSize(16);
+      text('Shopping in Goni Khan Market', canvasWid / 2, canvasHei - 60);
+      textAlign('center');
       animIndex = floor((frameCount / 10) % animFrames.length);  // animate on hover
       if (!marketSound.isPlaying()) {
         marketSound.play();
@@ -267,6 +273,10 @@ function draw() {
     image(animFrames[animIndex], animX, animY);
 
     if (mouseX > 313 && mouseX < 425 && mouseY > 170 && mouseY < 320) {
+      fill(255);
+      textSize(16);
+      text('Soothing sounds of Hazratbal', canvasWid / 2, canvasHei - 60);
+      textAlign('center');
       if (!hazratbal.isPlaying()) {
         hazratbal.play();
       }
@@ -356,6 +366,15 @@ function draw() {
   }
 }
 
+function mousePressed() {
+  if (mouseX > 855 && mouseX < 1500 && mouseY > 340 && mouseY < 500) {
+    alert('Goni Khan Market: \n\nOne of the oldest and busiest markets in Srinagar, particularly for women, to shop for occasions and festivals like Eid');
+  } else if (mouseX > 313 && mouseX < 425 && mouseY > 170 && mouseY < 320) {
+    alert('Hazratbal Mosque: \n\nA sacred mosque on the shores of Dal Lake, believed to house a relic of the Prophet. It is the most important shrine in Kashmir.');
+  } else if (mouseX > boat.x && mouseX < boat.x + 230 && mouseY > boat.y + 300 && mouseY < boat.y + 370) {
+    alert('Shikara Boat: \n\nA traditional wooden boat found on Dal Lake. Shikaras are used for fishing, transportation, and tourism, and are an iconic symbol of Kashmir.');
+  }
+}
 
 class Boat {
   constructor(x, y, speed) {
@@ -374,6 +393,10 @@ class Boat {
 
   hover() {
     if (mouseX > this.x && mouseX < this.x + 230 && mouseY > this.y + 300 && mouseY < this.y + 370) {
+      fill(255);
+      textSize(16);
+      text('Shikara Conversations', canvasWid / 2, canvasHei - 60);
+      textAlign('center');
       this.x += this.speed * 0.1;
       if (!shikaraSound.isPlaying()) {
         shikaraSound.play();
