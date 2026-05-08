@@ -3,9 +3,8 @@
 let canvasWid = 1440;
 let canvasHei = 800;
 
-let activePopup = '';  // stores which popup is open, empty means none
-
 // image related variables
+let animIndex;
 let settingImage;
 let settingImageSnow;
 let boat;
@@ -248,28 +247,26 @@ function draw() {
     boat.display();
     boat.hover();
 
-    let animIndex = 0;  // static by default
 
     if (mouseX > 855 && mouseX < 1500 && mouseY > 340 && mouseY < 500) {
       fill(255);
       textSize(16);
       text('Shopping in Goni Khan Market', canvasWid / 2, canvasHei - 60);
       textAlign('center');
-      animIndex = floor((frameCount / 10) % animFrames.length);  // animate on hover
       if (!marketSound.isPlaying()) {
         marketSound.play();
-      }
-      animX += 0.2;
-      animY += 0.007
-      if (animX > 250) {
-        animX = -300;
-        animY = -12;
       }
     } else {
       marketSound.stop();
     }
 
-
+    animX += 0.2;
+    animY += 0.007
+    if (animX > 250) {
+      animX = -300;
+      animY = -12;
+    }
+    animIndex = floor((frameCount / 10) % animFrames.length);  // animate on hover
     image(animFrames[animIndex], animX, animY);
 
     if (mouseX > 313 && mouseX < 425 && mouseY > 170 && mouseY < 320) {
@@ -297,53 +294,31 @@ function draw() {
     noStroke();
     fill(117, 123, 130);
 
-    if (mouseX > 313 && mouseX < 425 && mouseY > 170 && mouseY < 320) {
-      smokeY1 -= 0.5;
-      smokeX1 += + random(-0.5, 0.5)
-      if (smokeY1 < -20) {
-        smokeY1 = 210;
-      }
-
-      smokeY2 -= 0.5;
-      smokeX2 += + random(-0.5, 0.5)
-      if (smokeY2 < -20) {
-        smokeY2 = 210;
-      }
-
-      smokeY3 -= 0.5;
-      smokeX3 += + random(-0.5, 0.5)
-      if (smokeY3 < -20) {
-        smokeY3 = 210;
-      }
-    } else {
-      smokeX1 = 366; smokeY1 = 210;
-      smokeX2 = 366; smokeY2 = 150;
-      smokeX3 = 366; smokeY3 = 100;
-
+    smokeY1 -= 0.5;
+    smokeX1 += random(-0.2, 0.2)
+    if (smokeY1 < -20) {
+      smokeY1 = 210;
     }
+
+    smokeY2 -= 0.5;
+    smokeX2 += random(-0.2, 0.2)
+    if (smokeY2 < -20) {
+      smokeY2 = 210;
+    }
+
+    smokeY3 -= 0.5;
+    smokeX3 += random(-0.2, 0.2)
+    if (smokeY3 < -20) {
+      smokeY3 = 210;
+    }
+
     ellipse(smokeX1, smokeY1, 20, 20);
-    // smokeY1 -= 0.5;
-    // if (smokeY1 < -20) {
-    //   smokeY1 = 430;
-    // }
-
     ellipse(smokeX2, smokeY2, 15, 15);
-    // smokeY2 -= 0.5;
-    // if (smokeY2 < -20) {
-    //   smokeY2 = 430;
-    // }
-
     ellipse(smokeX3, smokeY3, 10, 10);
-    // smokeY3 -= 0.5;
-    // if (smokeY3 < -20) {
-    //   smokeY3 = 430;
-    // }
 
     image(chinar, mouseX - 25, mouseY - 25, 50, 50);
     noCursor();
   }
-  // image(chinar, mouseX - 25, mouseY - 25, 50, 50);
-  // noCursor();
 
   // manage background sound
   let isHoveringBoat = mouseX > boat.x && mouseX < boat.x + 230 && mouseY > boat.y + 300 && mouseY < boat.y + 370;
@@ -385,7 +360,7 @@ class Boat {
   }
 
   move() {
-    // this.x += this.speed * 0.1;
+    this.x += this.speed * 0.1;
     if (this.x > width) {
       this.x = 230;
     }
@@ -397,7 +372,7 @@ class Boat {
       textSize(16);
       text('Shikara Conversations', canvasWid / 2, canvasHei - 60);
       textAlign('center');
-      this.x += this.speed * 0.1;
+      // this.x += this.speed * 0.1;
       if (!shikaraSound.isPlaying()) {
         shikaraSound.play();
       }
